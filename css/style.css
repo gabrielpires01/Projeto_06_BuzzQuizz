@@ -7,6 +7,7 @@ body
 
 textarea {
     resize: none;
+    border: none;
 }
 
 textarea:focus {
@@ -24,7 +25,8 @@ strong {
 .none,
 .firstStep,
 .start,
-.quizzCreation
+.quizzCreation,
+.question
 {
     display: flex;
     justify-content: center;
@@ -38,7 +40,8 @@ strong {
 .none,
 .firstStep,
 .start,
-.quizzCreation 
+.quizzCreation,
+.question
 {
     flex-direction: column;
 }
@@ -54,6 +57,7 @@ strong {
     top: 0px;
     width: 100%;
     height: 50px;
+    z-index: 2;
 }
 
 /* Configurações do container */
@@ -125,7 +129,13 @@ strong {
     cursor: pointer;
 }
 
-.firstStep {
+.questionsCreation {
+    max-width: 600px;
+    width: 100%;
+}
+
+.firstStep,
+.question {
     width: 100%;
     background-color: white;
     padding: 20px 30px;
@@ -136,7 +146,17 @@ strong {
     margin-bottom: 0;
 }
 
-.firstStep textarea {
+.question {
+    margin-top: 50px;
+    align-items: start;
+}
+
+.question strong {
+    margin: 10px 0 20px;
+}
+
+.firstStep textarea,
+.question textarea {
     font-style: italic;
     width: 100%;
     margin: 0 auto 10px auto;
@@ -151,10 +171,6 @@ strong {
 .hidden {
     display: none;
 }
-
-
-
-
 
 
 @media (max-width: 1100px)
