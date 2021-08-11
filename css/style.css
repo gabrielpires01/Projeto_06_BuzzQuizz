@@ -2,6 +2,48 @@
 body
 {
     font-family: 'Roboto', sans-serif;
+    background-color: #E5E5E5;
+}
+
+textarea {
+    resize: none;
+    border: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/*Flex*/
+.top,
+.container,
+.userQuizzes,
+.none,
+.firstStep,
+.start,
+.quizzCreation,
+.question
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Flex-direction column*/
+
+.container,
+.userQuizzes,
+.none,
+.firstStep,
+.start,
+.quizzCreation,
+.question
+{
+    flex-direction: column;
 }
 
 /* Configurações Topo */
@@ -12,23 +54,18 @@ body
     font-size: 2em;
     font-weight: 700;
     position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     top: 0px;
     width: 100%;
     height: 50px;
+    z-index: 2;
 }
 
 /* Configurações do container */
 
-.container
+.container,
+.quizzCreation
 {
     margin: 50px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 1100px;
 }
 
@@ -39,11 +76,8 @@ body
     width: 100%;
     height: 10em;
     margin: 60px 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
+
 .noneQuizzes
 {
     color: #B9B9B9;
@@ -70,16 +104,79 @@ body
     font-weight: 700;
 }
 
+.start {
+    margin: 60px;
+    max-width: 600px;
+    width: 100%;
+}
 
+.start strong {
+    margin-bottom: 40px;
+    font-size: 20px;
+}
 
+.start button {
 
+    font-size: 16px;
+    margin-top: 50px;
+    color: white;
+    background-color: red;
+    border: none;
+    max-width: 350px;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
+.questionsCreation {
+    max-width: 600px;
+    width: 100%;
+}
 
+.firstStep,
+.question {
+    width: 100%;
+    background-color: white;
+    padding: 20px 30px;
+    box-shadow: 1px 1px 10px rgba(0,0,0 , 0.05) ;
+}
+
+.firstStep textarea:last-child {
+    margin-bottom: 0;
+}
+
+.question {
+    margin-top: 50px;
+    align-items: start;
+}
+
+.question strong {
+    margin: 10px 0 20px;
+}
+
+.firstStep textarea,
+.question textarea {
+    font-style: italic;
+    width: 100%;
+    margin: 0 auto 10px auto;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding-left: 10px;
+    opacity: 0.5;
+    line-height: 34px;
+}
+
+.hidden {
+    display: none;
+}
 
 
 @media (max-width: 1100px)
 {
-    .container
+    .container,
+    .quizzCreation
     {
         width: 90%;
     }
