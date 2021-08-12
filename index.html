@@ -36,7 +36,7 @@
     <div class="quizzCreation hidden">
         <div class="start">
             <strong>Começe pelo começo</strong>
-            <div class="firstStep">
+            <div class="first-step">
                 <p class="alert hidden">Preencha todos os campos</p>
                 <textarea id="title" rows="1" placeholder="Título do seu quizz"></textarea>
                 <textarea id="quizz-img-url" rows="1" placeholder="URL da imagem do quizz"></textarea>
@@ -45,9 +45,11 @@
             </div>
             <button onclick="questionsPage()">Prosseguir para criar perguntas</button>
         </div>
-        <div class="questionsCreation">
-
-        </div>
+        <div class="second-step hidden">
+            <div class="questionsCreation">
+            </div>
+            <button onclick="levelsPage()">Prosseguir para criar níveis</button>
+        </div>        
     </div>
     
     

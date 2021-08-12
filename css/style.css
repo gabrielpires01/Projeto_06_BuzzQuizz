@@ -23,10 +23,11 @@ strong {
 .container,
 .userQuizzes,
 .none,
-.firstStep,
+.first-step,
 .start,
 .quizzCreation,
-.question
+.question,
+.second-step
 {
     display: flex;
     justify-content: center;
@@ -38,10 +39,11 @@ strong {
 .container,
 .userQuizzes,
 .none,
-.firstStep,
+.first-step,
 .start,
 .quizzCreation,
-.question
+.question,
+.second-step
 {
     flex-direction: column;
 }
@@ -104,7 +106,8 @@ strong {
     font-weight: 700;
 }
 
-.start {
+.start,
+.second-step  {
     margin: 60px;
     max-width: 600px;
     width: 100%;
@@ -115,8 +118,8 @@ strong {
     font-size: 20px;
 }
 
-.start button {
-
+.start button,
+.second-step button {
     font-size: 16px;
     margin-top: 50px;
     color: white;
@@ -129,12 +132,7 @@ strong {
     cursor: pointer;
 }
 
-.questionsCreation {
-    max-width: 600px;
-    width: 100%;
-}
-
-.firstStep,
+.first-step,
 .question {
     width: 100%;
     background-color: white;
@@ -142,20 +140,38 @@ strong {
     box-shadow: 1px 1px 10px rgba(0,0,0 , 0.05) ;
 }
 
-.firstStep textarea:last-child {
+.first-step textarea:last-child {
     margin-bottom: 0;
 }
 
 .question {
     margin-top: 50px;
     align-items: start;
+    position: relative;
 }
 
 .question strong {
+    display: block;
     margin: 10px 0 20px;
 }
 
-.firstStep textarea,
+.pop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.pop strong{
+    margin-bottom: 10px;
+}
+
+ion-icon {
+    font-size: 30px;
+}
+
+.first-step textarea,
 .question textarea {
     font-style: italic;
     width: 100%;
@@ -166,6 +182,10 @@ strong {
     padding-left: 10px;
     opacity: 0.5;
     line-height: 34px;
+}
+
+.questionsCreation {
+    width: 100%;
 }
 
 .hidden {
