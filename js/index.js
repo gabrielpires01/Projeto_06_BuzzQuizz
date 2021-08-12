@@ -37,3 +37,15 @@ const questionsPage = () => {
         document.querySelector('.questionsCreation').innerHTML += pergunta
     }
 }
+
+
+const quizzesRenderer = (res) => {
+    for (let i = 0; i > res.data.length; i++){
+        const quizzes = `<div class="quizz">
+        <img src=${res.data.image}>
+        <div class="quizzTitle"><strong>${res.data.title}</strong></div>
+    </div>`
+        document.querySelector(".quizzes").innerHTML += quizzes;
+    };
+    
+};
