@@ -5,12 +5,12 @@ body
     background-color: #E5E5E5;
 }
 
-textarea {
+input {
     resize: none;
     border: none;
 }
 
-textarea:focus {
+input:focus {
     outline: none;
 }
 
@@ -27,7 +27,11 @@ strong {
 .start,
 .quizzCreation,
 .question,
-.second-step
+.second-step,
+.quizzes,
+.third-step
+.level,
+.levelsCreation
 {
     display: flex;
     justify-content: center;
@@ -43,7 +47,10 @@ strong {
 .start,
 .quizzCreation,
 .question,
-.second-step
+.second-step,
+.third-step,
+.level,
+.levelsCreation
 {
     flex-direction: column;
 }
@@ -98,19 +105,41 @@ strong {
 .allQuizzes
 {
     width: 100%;
-    height: 500px;
-    border: solid 1px red;
-}
-.allTitle
-{
-    font-weight: 700;
 }
 
 .start,
-.second-step  {
+.second-step,
+.third-step  {
     margin: 60px;
     max-width: 600px;
     width: 100%;
+}
+.quizzes{
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.quizz{
+    position: relative;
+    margin: 5px;
+    width: 350px;
+    height: 200px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, rgba(26, 26, 26, 0), rgb(20, 20, 20))
+}
+.quizz img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: -10;
+    border-radius: 10px;
+}
+.quizzTitle{
+    color: aliceblue;
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    font-size: 18px;
 }
 
 .start strong {
@@ -119,7 +148,8 @@ strong {
 }
 
 .start button,
-.second-step button {
+.second-step button,
+.third-step button {
     font-size: 16px;
     margin-top: 50px;
     color: white;
@@ -133,24 +163,27 @@ strong {
 }
 
 .first-step,
-.question {
+.question,
+.level {
     width: 100%;
     background-color: white;
     padding: 20px 30px;
     box-shadow: 1px 1px 10px rgba(0,0,0 , 0.05) ;
 }
 
-.first-step textarea:last-child {
+.first-step input:last-child {
     margin-bottom: 0;
 }
 
-.question {
+.question,
+.level {
     margin-top: 50px;
     align-items: start;
     position: relative;
 }
 
-.question strong {
+.question strong,
+.level strong {
     display: block;
     margin: 10px 0 20px;
 }
@@ -171,8 +204,9 @@ ion-icon {
     font-size: 30px;
 }
 
-.first-step textarea,
-.question textarea {
+.first-step input,
+.question input,
+.level input {
     font-style: italic;
     width: 100%;
     margin: 0 auto 10px auto;
@@ -184,7 +218,8 @@ ion-icon {
     line-height: 34px;
 }
 
-.questionsCreation {
+.questionsCreation,
+.levelsCreation {
     width: 100%;
 }
 
@@ -196,8 +231,18 @@ ion-icon {
 @media (max-width: 1100px)
 {
     .container,
-    .quizzCreation
+    .quizzCreation,
+    .levelsCreation
     {
         width: 90%;
     }
+
+
+    .quizzes,
+    .quizz
+    {
+        flex-direction: column;
+        width: 100%;
+    }
+
 }
