@@ -170,7 +170,7 @@ const yourQuizzesList = response => {
     }
     itemList.push(response.data.id)
     localStorage.setItem('id',JSON.stringify(itemList));
-    getQuizzes()
+    getQuizz(renderYourQuizzes)
 }
 
 /*Maybe Useful functions (can be adapted) */
@@ -220,7 +220,6 @@ const creatingInputs = (inputType ,index) => {
 
 const quizzesRenderer = (res) => {
     let quizz = res.data
-    console.log(quizz.length);
 
     for (let i = 0; i < quizz.length; i++){
         const quizzes = `<div class="quizz">
@@ -236,16 +235,11 @@ const quizzesRenderer = (res) => {
 /*Requests */
 const getQuizz = (func) =>{
     const promisse = axios.get(url)
-    promisse.then(func)
+    promisse.then(func).catch(alert)
 }
 const postQuizz = obj => {
     const promise = axios.post(url,obj)
     promise.then(yourQuizzesList).catch(alert)
-}
-
-const getQuizzes = () => {
-    const promise = axios.get(url);
-    promise.then(renderYourQuizzes).catch(alert)
 }
 
 
@@ -272,4 +266,5 @@ const renderYourQuizzes = response => {
     }
 }
 
-getQuizzes()
+getQuizz(renderYourQuizzes)
+getQuizz(quizzesRenderer)
