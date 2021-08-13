@@ -26,7 +26,8 @@ strong {
 .firstStep,
 .start,
 .quizzCreation,
-.question
+.question,
+.quizzes
 {
     display: flex;
     justify-content: center;
@@ -96,18 +97,39 @@ strong {
 .allQuizzes
 {
     width: 100%;
-    height: 500px;
-    border: solid 1px red;
-}
-.allTitle
-{
-    font-weight: 700;
 }
 
 .start {
     margin: 60px;
     max-width: 600px;
     width: 100%;
+}
+.quizzes{
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.quizz{
+    position: relative;
+    margin: 5px;
+    width: 350px;
+    height: 200px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, rgba(26, 26, 26, 0), rgb(20, 20, 20))
+}
+.quizz img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: -10;
+    border-radius: 10px;
+}
+.quizzTitle{
+    color: aliceblue;
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    font-size: 18px;
 }
 
 .start strong {
@@ -180,4 +202,13 @@ strong {
     {
         width: 90%;
     }
+
+
+    .quizzes,
+    .quizz
+    {
+        flex-direction: column;
+        width: 100%;
+    }
+
 }
