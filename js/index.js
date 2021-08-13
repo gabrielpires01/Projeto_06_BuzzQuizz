@@ -213,18 +213,29 @@ const creatingInputs = (inputType ,index) => {
 }
 
 const quizzesRenderer = (res) => {
-    for (let i = 0; i > res.data.length; i++){
+    let quizz = res.data
+    console.log(quizz.length);
+
+    for (let i = 0; i < quizz.length; i++){
         const quizzes = `<div class="quizz">
-        <img src=${res.data.image}>
-        <div class="quizzTitle"><strong>${res.data.title}</strong></div>
+        <img src=${quizz[i].image}>
+        <div class="quizzTitle"><strong>${quizz[i].title}</strong></div>
     </div>`
         document.querySelector(".quizzes").innerHTML += quizzes;
+        console.log("ok");
     };
     
 };
 
 /*Requests */
+const getQuizz = (func) =>{
+    const promisse = axios.get(url)
+    promisse.then(func)
+}
 const postQuizz = obj => {
     const promise = axios.post(url,obj)
     promise.then(yourQuizzesList).catch(alert)
 }
+
+
+getQuizz(quizzesRenderer)
