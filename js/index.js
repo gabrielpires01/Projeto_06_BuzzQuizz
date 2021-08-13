@@ -4,6 +4,8 @@ let img;
 let quantity;
 let levels;
 let questions;
+let levelsArr;
+let hex = /^#([0-9a-f]{3}){1,2}$/i;
 
 const createQuizz = () => {
     document.querySelector('.container').classList.add('hidden')
@@ -22,7 +24,7 @@ const getFirstValues = () => {
     quantity = Number(document.querySelector('#quantity').value);
     levels = Number(document.querySelector('#levels').value);
 
-    if ((title === "" || !isNaN(title)) || (img === "" || !isNaN(img)) || (levels === ""  || isNaN(levels)) || (quantity === "" ||isNaN(quantity)) ) {
+    if ((title === "" || !isNaN(title)) || !isValidHttpUrl(img) || (levels === ""  || isNaN(levels)) || (quantity === "" ||isNaN(quantity)) ) {
         document.querySelector('.alert').classList.remove('hidden')
         return
     }
@@ -36,7 +38,7 @@ const questionsPage = () => {
     for(let i = 1; i <= quantity; i++) {
         const pergunta = `
         <div class="question" id='question${i}'>
-            <p class="alert2 hidden">Preencha todos os campos</p>
+            <p class="alert2 hidden">Preencha todos os campos necessarios</p>
             <div class="pop"><strong>Pergunta ${i}</strong> <ion-icon name="open-outline" onclick="questionSelect(this)"></ion-icon></div>
             <div class="answers hidden">
                 <input class="text${i}" placeholder="Texto da pergunta"></input>
@@ -56,6 +58,7 @@ const questionsPage = () => {
 const questionSelect = element => {
     const parentelement = element.parentElement.parentElement;
     const answer = parentelement.querySelector('.answers');
+    element.classList.add('hidden')
     answer.classList.toggle('hidden')
 }
 
@@ -63,16 +66,21 @@ const getQuestionsValues = () => {
     questions = [];
     for (let i=1; i <= quantity; i++) {
         let answers = [];
-        const questTxt = document.querySelector(`.text${i}`).value;
-        const color = document.querySelector(`.back-color${i}`).value;
-        const text = document.querySelector(`.correct${i}`).value;
-        const url = document.querySelector(`.url${i}`).value;
+        const questTxt = document.querySelector(`.text${i}`).value === "" ? false: document.querySelector(`.text${i}`).value;
+        const color = document.querySelector(`.back-color${i}`).value === "" ? false: document.querySelector(`.back-color${i}`).value;
+        const text = document.querySelector(`.correct${i}`).value  === "" ? false: document.querySelector(`.correct${i}`).value;
+        const questionImgUrl = document.querySelector(`.url${i}`).value   === "" ? false: document.querySelector(`.url${i}`).value;
+        
         answers.push({
             text,
-            image: url,
-            isCorrextAnswer:true
+            image: questionImgUrl,
+            isCorrectAnswer:true
         })
-        answers = incorrectAnswers(answers,i)
+        answers = incorrectAnswers(answers,i);
+        if (!questTxt || !color || !hex.test(color) || !text || !url || !answers || !isValidHttpUrl(questionImgUrl)){
+            document.querySelector('.alert2').classList.remove('hidden')
+            return
+        }
         let question = {
             title:questTxt,
             color,
@@ -95,15 +103,43 @@ const levelsPage = () => {
             <div class="level">
                 <div class="pop"><strong>Nível ${i}</strong> <ion-icon name="open-outline" onclick="questionSelect(this)"></ion-icon></div>
                 <div class="answers hidden">
-                    <input id="level-text${i}" minlength="20" maxlength="65" type="text" placeholder="Título do seu quizz"></input>
-                    <input id="level-percent${i}" type="number" placeholder="URL da imagem do quizz"></input>
-                    <input id="level-img-url${i}" type="url" placeholder="Título do seu quizz"></input>
-                    <input id="level-descrip${i}" type="text" placeholder="URL da imagem do quizz"></input>
+                    <input id="level-text${i}" minlength="10" type="text" placeholder="Título do nível"></input>
+                    <input id="level-percent${i}" type="number" max="100" placeholder="% de acerto mínima"></input>
+                    <input id="level-img-url${i}" type="url" placeholder="URL da imagem do nível"></input>
+                    <input id="level-descrip${i}" minlength="30" type="text" placeholder="Descrição do nível"></input>
                 </div>
             </div>`
-
         document.querySelector('.levelsCreation').innerHTML += level
     }
+}
+
+const getLevelsValues = () => {
+    levelsArr = [];
+    for (let i= 1; i <= levels; i++) {
+        const text = document.getElementById(`level-text${i}`).value;
+        const percent = document.getElementById(`level-percent${i}`).value;
+        const imgUrl = document.getElementById(`level-img-url${i}`).value;
+        const descript = document.getElementById(`level-descrip${i}`).value;
+
+        let level = {
+            title: text,
+            image: imgUrl,
+            text: descript,
+            minValue: Number(percent)
+        }
+        levelsArr.push(level)
+    }
+    renderPostforQuizz()
+}
+
+const renderPostforQuizz = () => {
+    const quizz = {
+        title,
+        image: img,
+        questions,
+        levels: levelsArr
+    }
+    postQuizz(quizz)
 }
 
 /*Maybe Useful functions (can be adapted) */
@@ -111,16 +147,32 @@ const incorrectAnswers = (answers, index) => {
     for (let i = 1; i <= 3; i++ ) {
         const text = document.querySelector(`#incorrect${i}-${index}`).value;
         const url = document.querySelector(`#url${i}-${index}`).value;
+        if (i === 1 && (text === "" || url === "")){
+            document.querySelector('.alert2').classList.remove('hidden')
+            return false
+        }
         if (text != "" || url != "") {
             answers.push({
                 text,
                 image: url,
-                isCorrextAnswer:false
+                isCorrectAnswer:false
             })
         }
-    } 
+    }
     return answers
 }
+
+function isValidHttpUrl(string) {
+    let url;
+    
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;  
+    }
+  
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
 
 const creatingInputs = (inputType ,index) => {
     let inputs = '';
@@ -135,17 +187,6 @@ const creatingInputs = (inputType ,index) => {
     return inputs
 }
 
-const checkingValues = () => {
-
-}
-
-const quizz = {
-    title,
-    image: img,
-    questions,
-    levels: []
-}
-
 const quizzesRenderer = (res) => {
     for (let i = 0; i > res.data.length; i++){
         const quizzes = `<div class="quizz">
@@ -156,3 +197,9 @@ const quizzesRenderer = (res) => {
     };
     
 };
+
+const postQuizz = obj => {
+    console.log(obj)
+    const promise = axios.post(url,obj)
+    promise.then(response => console.log(response.data)).catch(alert)
+}

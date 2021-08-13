@@ -29,7 +29,7 @@ strong {
 .question,
 .second-step,
 .quizzes,
-.third-step
+.third-step,
 .level,
 .levelsCreation
 {
@@ -142,9 +142,11 @@ strong {
     font-size: 18px;
 }
 
-.start strong {
+.start strong,
+.second-step strong,
+.third-step strong {
     margin-bottom: 40px;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .start button,
@@ -236,7 +238,9 @@ ion-icon {
     {
         width: 90%;
     }
-
+    .level strong {
+        font-size: 18px;
+    }
 
     .quizzes,
     .quizz
