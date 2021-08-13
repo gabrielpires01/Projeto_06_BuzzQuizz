@@ -154,7 +154,7 @@ const finalScreen = quizz => {
     //document.querySelector('.yourQuizzes').innerHTML += `<li class="yourQuizz quizz">${quizzImg}</li>`;
 }
 
-getHomeScreem = () => {
+const getHomeScreem = () => {
     document.querySelector('.final-step').classList.add('hidden');
     document.querySelector('.none').classList.add('hidden');
     document.querySelector('.container').classList.remove('hidden');
@@ -164,7 +164,13 @@ getHomeScreem = () => {
 }
 
 const yourQuizzesList = response => {
-    localStorage.setItem('id',String(response.data.id));
+    let itemList = JSON.parse(localStorage.getItem('id'));
+    if (!itemList) {
+        itemList = [];
+    }
+    itemList.push(response.data.id)
+    localStorage.setItem('id',JSON.stringify(itemList));
+    getQuizzes()
 }
 
 /*Maybe Useful functions (can be adapted) */
@@ -228,3 +234,34 @@ const postQuizz = obj => {
     const promise = axios.post(url,obj)
     promise.then(yourQuizzesList).catch(alert)
 }
+
+const getQuizzes = () => {
+    const promise = axios.get(url);
+    promise.then(renderYourQuizzes).catch(alert)
+}
+
+
+const renderYourQuizzes = response => {
+    const quizzArr = response.data;
+    const localArr = JSON.parse(localStorage.getItem('id'));
+    
+    if((localArr != [] || localArr != undefined) && localArr != null) {
+        document.querySelector('.none').classList.add('hidden');
+        document.querySelector('.quizzesList').classList.remove('hidden');
+        document.querySelector('.userQuizzes').style.border = 'none'
+    } else {
+        return
+    }
+    for(let i =0;i < localArr.length; i++) {
+        const isMatch = quizzArr.find(element => element.id === localArr[i])
+        if(isMatch != undefined) {
+            const quizzImg = `
+                <img src=${isMatch.image}>
+                <div class="quizzTitle">${isMatch.title}</div>
+            `;
+            document.querySelector('.yourQuizzes').innerHTML += `<li class="yourQuizz quizz">${quizzImg}</li>`;
+        }
+    }
+}
+
+getQuizzes()
