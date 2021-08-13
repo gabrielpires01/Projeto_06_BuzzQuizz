@@ -20,7 +20,7 @@ strong {
 
 /*Flex*/
 .top,
-.container,
+.list,
 .userQuizzes,
 .none,
 .first-step,
@@ -41,7 +41,7 @@ strong {
 
 /*Flex-direction column*/
 
-.container,
+.list,
 .userQuizzes,
 .none,
 .first-step,
@@ -71,9 +71,9 @@ strong {
     z-index: 2;
 }
 
-/* Configurações do container */
+/* Configurações do list */
 
-.container,
+.list,
 .quizzCreation
 {
     margin: 50px auto;
@@ -252,7 +252,7 @@ ion-icon {
 
 @media (max-width: 1100px)
 {
-    .container,
+    .list,
     .quizzCreation,
     .levelsCreation
     {

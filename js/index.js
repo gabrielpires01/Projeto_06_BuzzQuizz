@@ -8,7 +8,7 @@ let levelsArr;
 let hex = /^#([0-9a-f]{3}){1,2}$/i;
 
 const createQuizz = () => {
-    document.querySelector('.container').classList.add('hidden')
+    document.querySelector('.list').classList.add('hidden')
     document.querySelector('.quizzCreation').classList.remove('hidden')
     title;
     img;
@@ -157,7 +157,7 @@ const finalScreen = quizz => {
 getHomeScreem = () => {
     document.querySelector('.final-step').classList.add('hidden');
     document.querySelector('.none').classList.add('hidden');
-    document.querySelector('.container').classList.remove('hidden');
+    document.querySelector('.list').classList.remove('hidden');
     document.querySelector('.created').classList.remove('hidden');
     document.querySelector('.quizzesList').classList.remove('hidden');
     document.querySelector('.userQuizzes').style.border = 'none'
