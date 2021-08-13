@@ -40,18 +40,27 @@
     <div class="quizzCreation hidden">
         <div class="start">
             <strong>Começe pelo começo</strong>
-            <div class="firstStep">
+            <div class="first-step">
                 <p class="alert hidden">Preencha todos os campos</p>
-                <textarea id="title" rows="1" placeholder="Título do seu quizz"></textarea>
-                <textarea id="quizz-img-url" rows="1" placeholder="URL da imagem do quizz"></textarea>
-                <textarea id="quantity" rows="1" placeholder="Quantidade de perguntas do quizz"></textarea>
-                <textarea id="levels" rows="1" placeholder="Quantidade de níveis do quizz"></textarea>
+                <input id="title" minlength="20" maxlength="65" type="text" placeholder="Título do seu quizz"></input>
+                <input id="quizz-img-url" type="url" placeholder="URL da imagem do quizz"></input>
+                <input id="quantity" type="number" min="3" placeholder="Quantidade de perguntas do quizz"></input>
+                <input id="levels" type="number" min="2" placeholder="Quantidade de níveis do quizz"></input>
             </div>
-            <button onclick="questionsPage()">Prosseguir para criar perguntas</button>
+            <button onclick="getFirstValues()">Prosseguir para criar perguntas</button>
         </div>
-        <div class="questionsCreation">
-
+        <div class="second-step hidden">
+            <strong>Crie suas perguntas</strong>
+            <div class="questionsCreation">
+            </div>
+            <button onclick="getQuestionsValues()">Prosseguir para criar níveis</button>
         </div>
+        <div class="third-step hidden">
+            <strong>Agora, decida os níveis</strong>
+            <div class="levelsCreation">
+            </div>
+            <button onclick="getLevelsValues()">Finalizar Quiz</button>
+        </div>      
     </div>
     
     

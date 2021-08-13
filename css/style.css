@@ -5,12 +5,12 @@ body
     background-color: #E5E5E5;
 }
 
-textarea {
+input {
     resize: none;
     border: none;
 }
 
-textarea:focus {
+input:focus {
     outline: none;
 }
 
@@ -23,11 +23,15 @@ strong {
 .container,
 .userQuizzes,
 .none,
-.firstStep,
+.first-step,
 .start,
 .quizzCreation,
 .question,
-.quizzes
+.second-step,
+.quizzes,
+.third-step,
+.level,
+.levelsCreation
 {
     display: flex;
     justify-content: center;
@@ -39,10 +43,14 @@ strong {
 .container,
 .userQuizzes,
 .none,
-.firstStep,
+.first-step,
 .start,
 .quizzCreation,
-.question
+.question,
+.second-step,
+.third-step,
+.level,
+.levelsCreation
 {
     flex-direction: column;
 }
@@ -99,7 +107,9 @@ strong {
     width: 100%;
 }
 
-.start {
+.start,
+.second-step,
+.third-step  {
     margin: 60px;
     max-width: 600px;
     width: 100%;
@@ -132,13 +142,16 @@ strong {
     font-size: 18px;
 }
 
-.start strong {
+.start strong,
+.second-step strong,
+.third-step strong {
     margin-bottom: 40px;
-    font-size: 20px;
+    font-size: 22px;
 }
 
-.start button {
-
+.start button,
+.second-step button,
+.third-step button {
     font-size: 16px;
     margin-top: 50px;
     color: white;
@@ -151,34 +164,51 @@ strong {
     cursor: pointer;
 }
 
-.questionsCreation {
-    max-width: 600px;
-    width: 100%;
-}
-
-.firstStep,
-.question {
+.first-step,
+.question,
+.level {
     width: 100%;
     background-color: white;
     padding: 20px 30px;
     box-shadow: 1px 1px 10px rgba(0,0,0 , 0.05) ;
 }
 
-.firstStep textarea:last-child {
+.first-step input:last-child {
     margin-bottom: 0;
 }
 
-.question {
+.question,
+.level {
     margin-top: 50px;
     align-items: start;
+    position: relative;
 }
 
-.question strong {
+.question strong,
+.level strong {
+    display: block;
     margin: 10px 0 20px;
 }
 
-.firstStep textarea,
-.question textarea {
+.pop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.pop strong{
+    margin-bottom: 10px;
+}
+
+ion-icon {
+    font-size: 30px;
+}
+
+.first-step input,
+.question input,
+.level input {
     font-style: italic;
     width: 100%;
     margin: 0 auto 10px auto;
@@ -190,6 +220,11 @@ strong {
     line-height: 34px;
 }
 
+.questionsCreation,
+.levelsCreation {
+    width: 100%;
+}
+
 .hidden {
     display: none;
 }
@@ -198,11 +233,14 @@ strong {
 @media (max-width: 1100px)
 {
     .container,
-    .quizzCreation
+    .quizzCreation,
+    .levelsCreation
     {
         width: 90%;
     }
-
+    .level strong {
+        font-size: 18px;
+    }
 
     .quizzes,
     .quizz
