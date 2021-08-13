@@ -88,7 +88,6 @@ const getQuestionsValues = () => {
         }
         questions.push(question)
     }
-    console.log(questions)
 
     levelsPage()
 }
@@ -139,7 +138,33 @@ const renderPostforQuizz = () => {
         questions,
         levels: levelsArr
     }
+    finalScreen(quizz)
     postQuizz(quizz)
+}
+
+const finalScreen = quizz => {
+    document.querySelector('.third-step').classList.add('hidden');
+    document.querySelector('.final-step').classList.remove('hidden');
+
+    const quizzImg = `
+        <img src=${quizz.image}>
+        <div class="quizzTitle">${quizz.title}</div>
+    `;
+    document.querySelector('.final-step .yourQuizz').innerHTML = quizzImg;
+    //document.querySelector('.yourQuizzes').innerHTML += `<li class="yourQuizz quizz">${quizzImg}</li>`;
+}
+
+getHomeScreem = () => {
+    document.querySelector('.final-step').classList.add('hidden');
+    document.querySelector('.none').classList.add('hidden');
+    document.querySelector('.container').classList.remove('hidden');
+    document.querySelector('.created').classList.remove('hidden');
+    document.querySelector('.quizzesList').classList.remove('hidden');
+    document.querySelector('.userQuizzes').style.border = 'none'
+}
+
+const yourQuizzesList = response => {
+    localStorage.setItem('id',String(response.data.id));
 }
 
 /*Maybe Useful functions (can be adapted) */
@@ -198,8 +223,8 @@ const quizzesRenderer = (res) => {
     
 };
 
+/*Requests */
 const postQuizz = obj => {
-    console.log(obj)
     const promise = axios.post(url,obj)
-    promise.then(response => console.log(response.data)).catch(alert)
+    promise.then(yourQuizzesList).catch(alert)
 }

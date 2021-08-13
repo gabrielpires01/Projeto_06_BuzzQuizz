@@ -14,7 +14,7 @@
 <body>
     <div class="top"><h1>BuzzQuizz</h1></div>
     <div class="container">
-        <div class="hidden"><strong>Seus Quizzes</strong><ion-icon name="add-circle-sharp" onclick="createQuizz()"></ion-icon></div>
+        <div class="created hidden"><strong>Seus Quizzes</strong><ion-icon name="add-circle-sharp" onclick="createQuizz()"></ion-icon></div>
         <div class="userQuizzes">
             <div class="none">
                 <div class="noneQuizzes">Você ainda não criou nenhum quizz ainda :(</div>
@@ -60,7 +60,13 @@
             <div class="levelsCreation">
             </div>
             <button onclick="getLevelsValues()">Finalizar Quiz</button>
-        </div>      
+        </div>
+        <div class="final-step hidden">
+            <strong>Seu quizz está pronto!</strong>
+            <div class="yourQuizz"></div>
+            <button onclick="getLevelsValues()">Finalizar Quiz</button>
+            <button class="go-back" onclick="getHomeScreem()">Voltar para home</button> 
+        </div>
     </div>
     
     
