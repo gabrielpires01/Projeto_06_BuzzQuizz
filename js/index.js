@@ -220,14 +220,16 @@ const creatingInputs = (inputType ,index) => {
 
 const quizzesRenderer = (res) => {
     let quizz = res.data
-
+    const localArr = JSON.parse(localStorage.getItem('id'));
     for (let i = 0; i < quizz.length; i++){
-        const quizzes = `<div class="quizz">
-        <img src=${quizz[i].image}>
-        <div class="quizzTitle"><strong>${quizz[i].title}</strong></div>
-    </div>`
-        document.querySelector(".quizzes").innerHTML += quizzes;
-        console.log("ok");
+        if (!localArr.includes(quizz[i].id)) {
+            const quizzes = `<div class="quizz">
+            <img src=${quizz[i].image}>
+            <div class="quizzTitle"><strong>${quizz[i].title}</strong></div>
+        </div>`
+            document.querySelector(".quizzes").innerHTML += quizzes;
+        }
+        
     };
     
 };
