@@ -24,7 +24,7 @@ const getFirstValues = () => {
     quantity = Number(document.querySelector('#quantity').value);
     levels = Number(document.querySelector('#levels').value);
 
-    if ((title === "" || !isNaN(title)) || !isValidHttpUrl(img) || (levels === ""  || isNaN(levels)) || (quantity === "" ||isNaN(quantity)) ) {
+    if ((title === "" || !isNaN(title)) || !isValidHttpUrl(img) || (levels === ""  || isNaN(levels) || levels < 2) || (quantity === "" ||isNaN(quantity) || quantity < 3)) {
         document.querySelector('.alert').classList.remove('hidden')
         return
     }
@@ -151,7 +151,6 @@ const finalScreen = quizz => {
         <div class="quizzTitle">${quizz.title}</div>
     `;
     document.querySelector('.final-step .yourQuizz').innerHTML = quizzImg;
-    //document.querySelector('.yourQuizzes').innerHTML += `<li class="yourQuizz quizz">${quizzImg}</li>`;
 }
 
 const getHomeScreem = () => {
@@ -219,8 +218,11 @@ const creatingInputs = (inputType ,index) => {
 }
 
 const quizzesRenderer = (res) => {
-    let quizz = res.data
+    let quizz = res.data;
     const localArr = JSON.parse(localStorage.getItem('id'));
+    if (localArr === null) {
+        return
+    }
     for (let i = 0; i < quizz.length; i++){
         if (!localArr.includes(quizz[i].id)) {
             const quizzes = `<div class="quizz">
@@ -248,7 +250,21 @@ const postQuizz = obj => {
 const renderYourQuizzes = response => {
     const quizzArr = response.data;
     const localArr = JSON.parse(localStorage.getItem('id'));
-    
+    if (localArr === null) {
+        return
+    }
+    for(let i =0;i < localArr.length; i++) {
+        const isMatch = quizzArr.find(element => localArr.includes(element.id));
+        if(isMatch != undefined) {
+            const quizzImg = `
+                <img src=${isMatch.image}>
+                <div class="quizzTitle"><strong>${isMatch.title}</strong></div>
+            `;
+            document.querySelector('.yourQuizzes').innerHTML += `<li class="yourQuizz quizz">${quizzImg}</li>`;
+        } else {
+            return
+        }
+    }
     if((localArr != [] || localArr != undefined) && localArr != null) {
         document.querySelector('.none').classList.add('hidden');
         document.querySelector('.quizzesList').classList.remove('hidden');
@@ -256,17 +272,15 @@ const renderYourQuizzes = response => {
     } else {
         return
     }
-    for(let i =0;i < localArr.length; i++) {
-        const isMatch = quizzArr.find(element => element.id === localArr[i])
-        if(isMatch != undefined) {
-            const quizzImg = `
-                <img src=${isMatch.image}>
-                <div class="quizzTitle">${isMatch.title}</div>
-            `;
-            document.querySelector('.yourQuizzes').innerHTML += `<li class="yourQuizz quizz">${quizzImg}</li>`;
-        }
+    
+}
+
+const startPage = () => {
+    getQuizz(renderYourQuizzes)
+    getQuizz(quizzesRenderer)
+    if(localStorage.getItem('id') != undefined || localStorage.getItem('id') != null ) {
+        document.querySelector('.created').classList.remove('hidden');
     }
 }
 
-getQuizz(renderYourQuizzes)
-getQuizz(quizzesRenderer)
+startPage()
